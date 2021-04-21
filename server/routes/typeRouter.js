@@ -1,7 +1,9 @@
 const Router = require('express')
 const router = new Router()
 const typeController = require('../controllers/typeContoller')
-router.post('/', typeController.create)
+const checkRole = require('../middleware/checkRoleMIddleware')
+
+router.post('/', checkRole('ADMIN'), typeController.create)
 router.get('/', typeController.getAll)
 
 module.exports = router
